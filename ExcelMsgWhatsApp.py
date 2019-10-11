@@ -9,7 +9,7 @@ def whatsapp(chrome_driver):
     book = openpyxl.load_workbook('Contacts.xlsx')
     sheet = book.active
     driver = webdriver.Chrome(f'/home/carlmark/PycharmProjects/WhatsApp_Automation/{chrome_driver}')
-    msg = sheet["C1"].value
+    msg = sheet["C2"].value
     msg = msg.split('\n')
 
     i = 2
@@ -33,12 +33,12 @@ def whatsapp(chrome_driver):
             button = driver.find_element_by_class_name("_3M-N-")
             time.sleep(2)
             button.click()
-            print(f"Complete {num.value}")
+            print(i-1, f"Complete {num.value}")
             time.sleep(20)
             sheet[f"B{i}"] = 'Complete'
 
         except Exception as e:
-            print(f"Incomplete {num.value}")
+            print(i-1, f"Incomplete {num.value}")
             sheet[f"B{i}"] = 'Incomplete'
 
         book.save('Contacts.xlsx')
